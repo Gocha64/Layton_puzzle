@@ -3,6 +3,7 @@ package gocha.jjamppong.service;
 import gocha.jjamppong.Entity.Member;
 import gocha.jjamppong.Entity.Puzzle;
 import gocha.jjamppong.Entity.SolvedPuzzle;
+import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import gocha.jjamppong.repository.PuzzleRepository;
 import gocha.jjamppong.repository.SolvedPuzzleRepository;
@@ -34,26 +35,41 @@ public class SolvedPuzzleServiceTest {
         String name = "kim";
         String password = "1234";
         String cash = "0";
-        Member member = new Member(name, password, cash);
+        MemberDto memberDto = new MemberDto(name, password, cash);
 
         Long difficulty = 40L;
         String image_path = "/";
         String content = "content";
         String solution = "solution";
         String puzzle_code = "1-1";
-        Puzzle puzzle = new Puzzle(difficulty, image_path, content, solution, puzzle_code);
+        Puzzle puzzle = Puzzle.builder()
+                .difficulty(difficulty)
+                .image_path(image_path)
+                .content(content)
+                .solution(solution)
+                .puzzle_code(puzzle_code)
+                .build();
 
-        SolvedPuzzle solvedPuzzle = SolvedPuzzle.createSolvedPuzzle(member, puzzle, puzzle.getDifficulty());
+        SolvedPuzzle solvedPuzzle = SolvedPuzzle.builder()
+                .score(puzzle.getDifficulty())
+                .build();
         //when
         puzzleService.register(puzzle);
-        memberService.register(member);
+        memberService.register(memberDto);
+
+
+        Member member = memberRepository.findOne(1L);
+        puzzle.addSolved_puzzle(solvedPuzzle);
+
         Long id = solvedPuzzleService.register(solvedPuzzle);
+
         System.out.println("멤버" + member.getSolved_puzzles().get(0).getId());
         System.out.println("퍼즐" + puzzle.getSolved_puzzles().get(0).getId());
 
         //then
         assertEquals(solvedPuzzle, solvedPuzzleRepository.findOne(id));
     }
+
 
 
 }

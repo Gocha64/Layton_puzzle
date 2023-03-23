@@ -27,7 +27,13 @@ public class PuzzleServiceTest {
         String content = "content";
         String solution = "solution";
         String puzzle_code = "1-1";
-        Puzzle puzzle = new Puzzle(difficulty, image_path, content, solution, puzzle_code);
+        Puzzle puzzle = Puzzle.builder()
+                .difficulty(difficulty)
+                .content(content)
+                .solution(solution)
+                .image_path(image_path)
+                .puzzle_code(puzzle_code)
+                .build();
 
         //when
         Long savedId = puzzleService.register(puzzle);
@@ -35,5 +41,6 @@ public class PuzzleServiceTest {
         //then
         assertEquals(puzzle, puzzleRepository.findOne(savedId));
     }
+
 
 }

@@ -2,6 +2,7 @@ package gocha.jjamppong.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,9 @@ public class Puzzle {
     @OneToMany(mappedBy = "puzzle")
     private List<SolvedPuzzle> solved_puzzles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "puzzle")
+    private List<Hint> hints = new ArrayList<>();
+
     private Long difficulty;
 
     private String image_path;
@@ -34,6 +38,12 @@ public class Puzzle {
         solvedPuzzle.setPuzzle(this);
     }
 
+    public void addHint(Hint hint){
+        hints.add(hint);
+        hint.setPuzzle(this);
+    }
+
+    @Builder
     public Puzzle(Long difficulty, String image_path, String content, String solution, String puzzle_code) {
 
         this.difficulty = difficulty;

@@ -1,7 +1,7 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.Entity.Member;
 import gocha.jjamppong.Entity.SolvedPuzzle;
+import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,13 +29,13 @@ public class MemberServiceTest {
         String name = "kim";
         String password = "1234";
         String cash = "0";
-        Member member = new Member(name, password, cash);
+        MemberDto member = new MemberDto(name, password, cash);
 
         //when
         Long savedId = memberService.register(member);
 
         //then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member.getName(), memberRepository.findOne(savedId).getName());
     }
 
 

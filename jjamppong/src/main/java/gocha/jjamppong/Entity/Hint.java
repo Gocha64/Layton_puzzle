@@ -1,6 +1,5 @@
 package gocha.jjamppong.Entity;
 
-
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,31 +7,31 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Table(name = "solved_puzzle")
-public class SolvedPuzzle {
+public class Hint {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "solved_id")
+    @Column(name = "hint_id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    @Setter
-    private Member member;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "puzzle_id")
     @Setter
     private Puzzle puzzle;
 
-    @Setter
-    private Long score;
+    private String content;
 
+    private String image_path;
+
+    //힌트의 단계
+    private int level;
 
     @Builder
-    public SolvedPuzzle(Long score) {
-        this.score = score;
+    public Hint (String content, String image_path, int level){
+        this.content = content;
+        this.image_path = image_path;
+        this.level = level;
 
     }
+
 }

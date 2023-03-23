@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 
 @Repository
@@ -16,6 +17,12 @@ public class PuzzleRepository {
 
     public Puzzle findOne(Long id){
         return em.find(Puzzle.class, id);
+    }
+
+    public List<Puzzle> findAll(){
+        return em.createQuery("select p from Puzzle p", Puzzle.class)
+                .getResultList();
+
     }
 
 }
