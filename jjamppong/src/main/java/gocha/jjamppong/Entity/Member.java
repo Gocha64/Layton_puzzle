@@ -2,15 +2,14 @@ package gocha.jjamppong.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Member {
 
     @Id
