@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -19,4 +21,10 @@ public class PuzzleService {
         puzzleRepository.save(puzzle);
         return puzzle.getId();
     }
+    
+    // 퍼즐 전체 조회
+    public List<Puzzle> findPuzzles() { return puzzleRepository.findAll();}
+    
+    // 퍼즐 단일 조회
+    public Puzzle findOne(Long id) {return puzzleRepository.findOne(id);}
 }
