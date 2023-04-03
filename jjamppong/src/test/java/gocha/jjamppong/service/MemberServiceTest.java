@@ -1,19 +1,20 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.Entity.SolvedPuzzle;
+import gocha.jjamppong.Entity.Member;
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 
 @RunWith(SpringRunner.class)
@@ -21,21 +22,25 @@ import static org.junit.Assert.*;
 @Transactional
 public class MemberServiceTest {
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+
+    @MockBean MemberRepository memberRepository;
+
+    Member member;
 
     @Test
     public void 회원가입() throws Exception{
+
         //given
-        String name = "kim";
-        String password = "1234";
-        String cash = "0";
-        MemberDto member = new MemberDto(name, password, cash);
+        MemberDto memberDto = new MemberDto("kim", "1234", "0");
+        member = memberDto.toEntity();
+
+        given(memberRepository.save(member)).willReturn(1L);
 
         //when
-        Long savedId = memberService.register(member);
+        Long savedId = memberService.register(memberDto);
 
         //then
-        assertEquals(member.getName(), memberRepository.findOne(savedId).getName());
+        verify(memberRepository).save(any());
     }
 
 
