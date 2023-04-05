@@ -24,10 +24,12 @@ public class PuzzleServiceTest {
         //given
         Long difficulty = 40L;
         String image_path = "/";
+        String title = "title";
         String content = "content";
         String solution = "solution";
         String puzzle_code = "1-1";
         Puzzle puzzle = Puzzle.builder()
+                .title(title)
                 .difficulty(difficulty)
                 .content(content)
                 .solution(solution)

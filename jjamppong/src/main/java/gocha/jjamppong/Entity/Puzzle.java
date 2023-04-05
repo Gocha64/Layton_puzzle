@@ -4,6 +4,7 @@ package gocha.jjamppong.Entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Puzzle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,8 @@ public class Puzzle {
 
     @OneToMany(mappedBy = "puzzle")
     private List<Hint> hints = new ArrayList<>();
+
+    private String title;
 
     private Long difficulty;
 
@@ -44,8 +48,9 @@ public class Puzzle {
     }
 
     @Builder
-    public Puzzle(Long difficulty, String image_path, String content, String solution, String puzzle_code) {
+    public Puzzle(String title, Long difficulty, String image_path, String content, String solution, String puzzle_code) {
 
+        this.title = title;
         this.difficulty = difficulty;
         this.image_path = image_path;
         this.content = content;

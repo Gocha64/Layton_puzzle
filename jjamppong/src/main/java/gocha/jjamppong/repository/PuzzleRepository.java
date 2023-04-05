@@ -13,7 +13,10 @@ public class PuzzleRepository {
 
     private final EntityManager em;
 
-    public void save(Puzzle puzzle) {em.persist(puzzle);}
+    public Long save(Puzzle puzzle) {
+        em.persist(puzzle);
+        return puzzle.getId();
+    }
 
     public Puzzle findOne(Long id){
         return em.find(Puzzle.class, id);

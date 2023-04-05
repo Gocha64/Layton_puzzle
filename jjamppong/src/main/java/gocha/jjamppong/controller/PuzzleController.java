@@ -30,7 +30,7 @@ public class PuzzleController {
 
         model.addAttribute("puzzles", puzzles);
 
-        return "puzzles/puzzleForm";
+        return "puzzles/puzzleBoard";
     }
 
 
