@@ -1,7 +1,7 @@
 package gocha.jjamppong.service;
 
 
-import gocha.jjamppong.Entity.SolvedPuzzle;
+import gocha.jjamppong.entity.SolvedPuzzle;
 import gocha.jjamppong.repository.SolvedPuzzleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

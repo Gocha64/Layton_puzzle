@@ -1,8 +1,6 @@
 package gocha.jjamppong.repository;
 
-import gocha.jjamppong.Entity.Member;
-import gocha.jjamppong.Entity.Puzzle;
-import gocha.jjamppong.dto.MemberDto;
+import gocha.jjamppong.entity.Puzzle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

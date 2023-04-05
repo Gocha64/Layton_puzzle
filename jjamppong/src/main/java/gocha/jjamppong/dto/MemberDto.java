@@ -1,6 +1,6 @@
 package gocha.jjamppong.dto;
 
-import gocha.jjamppong.Entity.Member;
+import gocha.jjamppong.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

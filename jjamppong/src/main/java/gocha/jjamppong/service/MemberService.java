@@ -1,6 +1,5 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.Entity.Member;
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

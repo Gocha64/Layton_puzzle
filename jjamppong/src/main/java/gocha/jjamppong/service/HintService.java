@@ -1,7 +1,7 @@
 package gocha.jjamppong.service;
 
 
-import gocha.jjamppong.Entity.Hint;
+import gocha.jjamppong.entity.Hint;
 import gocha.jjamppong.repository.HintRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,9 @@
 package gocha.jjamppong.repository;
-import gocha.jjamppong.Entity.Member;
-import gocha.jjamppong.Entity.SolvedPuzzle;
-import gocha.jjamppong.service.SolvedPuzzleService;
+import gocha.jjamppong.entity.SolvedPuzzle;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

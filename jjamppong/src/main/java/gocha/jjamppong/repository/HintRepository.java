@@ -1,8 +1,7 @@
 package gocha.jjamppong.repository;
 
 
-import gocha.jjamppong.Entity.Hint;
-import gocha.jjamppong.Entity.Puzzle;
+import gocha.jjamppong.entity.Hint;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

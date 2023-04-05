@@ -1,6 +1,6 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.Entity.Member;
+import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;

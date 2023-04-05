@@ -1,4 +1,4 @@
-package gocha.jjamppong.Entity;
+package gocha.jjamppong.entity;
 
 
 import jakarta.persistence.*;

@@ -1,12 +1,11 @@
 package gocha.jjamppong.controller;
 
-import gocha.jjamppong.Entity.Puzzle;
+import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.service.PuzzleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;

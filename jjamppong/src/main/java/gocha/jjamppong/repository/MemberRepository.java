@@ -1,7 +1,7 @@
 package gocha.jjamppong.repository;
 
 
-import gocha.jjamppong.Entity.Member;
+import gocha.jjamppong.entity.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

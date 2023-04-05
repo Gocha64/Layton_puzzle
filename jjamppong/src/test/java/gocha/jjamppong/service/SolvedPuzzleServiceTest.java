@@ -1,8 +1,8 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.Entity.Member;
-import gocha.jjamppong.Entity.Puzzle;
-import gocha.jjamppong.Entity.SolvedPuzzle;
+import gocha.jjamppong.entity.Member;
+import gocha.jjamppong.entity.Puzzle;
+import gocha.jjamppong.entity.SolvedPuzzle;
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.repository.MemberRepository;
 import gocha.jjamppong.repository.PuzzleRepository;
