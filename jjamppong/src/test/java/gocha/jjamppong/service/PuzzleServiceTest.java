@@ -40,7 +40,7 @@ public class PuzzleServiceTest {
         Long savedId = puzzleService.register(puzzle);
 
         //then
-        assertEquals(puzzle, puzzleRepository.findOne(savedId));
+        assertEquals(puzzle, puzzleRepository.findById(savedId));
     }
 
 

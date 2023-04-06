@@ -54,26 +54,47 @@
         <!-- Page content-->
         <div class="container-fluid">
             <h1 class="mt-4">Simple puzzle List</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th>퍼즐번호</th>
-                    <th>제목</th>
-                    <th>난이도</th>
-                </tr>
-                </thead>
+            <div style="margin-left: 100px; font-size: 120%;">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>퍼즐번호</th>
+                        <th>제목</th>
+                        <th>난이도</th>
+                    </tr>
+                    </thead>
 
-                <tbody>
-                <tr th:each = "puzzle : ${puzzles}">
-                    <td width="100" th:text="${puzzle.puzzle_code}">퍼즐번호</td>
-                    <td width="250" >
-                        <a th:text="${puzzle.title}" th:href="@{/}">퍼즐제목</a>
-                    </td>
-                    <td width="100" th:text="${puzzle.difficulty}">퍼즐난이도</td>
-                </tr>
-                </tbody>
+                    <tbody>
+                    <tr th:each = "puzzle : ${puzzles}">
+                        <td width="100" th:text="${puzzle.puzzle_code}">퍼즐번호</td>
+                        <td width="250" >
+                            <a th:text="${puzzle.title}" th:href="@{/}">퍼즐제목</a>
+                        </td>
+                        <td width="100" th:text="${puzzle.difficulty}">퍼즐난이도</td>
+                    </tr>
 
-            </table>
+                    </tbody>
+                </table>
+
+                <div class = "layout">
+                    <a th:href="@{/puzzles(page = ${0})}" th:text ="${1}"></a>
+                    ...
+
+                    <th:block th:each ="page : ${#numbers.sequence(startPage, endPage)}">
+
+                        <a th:if = "${page != nowPage}" th:href="@{/puzzles(page = ${page-1})}" th:text ="${page}"></a>
+
+                        <strong th:if = "${page == nowPage}" th:href="@{/puzzles(page = ${page-1})}" th:text ="${page}"></strong>
+
+                    </th:block>
+
+                    ...
+                    <a th:href="@{/puzzles(page = ${totalPage-1})}" th:text ="${totalPage}"></a>
+                </div>
+            </div>
+
+
+
 
 
         </div>

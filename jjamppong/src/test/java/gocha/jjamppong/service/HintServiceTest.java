@@ -12,11 +12,12 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback(false)
 public class HintServiceTest {
 
     @Autowired
@@ -34,11 +35,12 @@ public class HintServiceTest {
     public void 힌트등록() throws Exception {
         //given
         Long difficulty = 40L;
+        String title = "title";
         String image_path = "/";
         String content = "content";
         String solution = "solution";
         String puzzle_code = "1-1";
-        Puzzle puzzle = new Puzzle(difficulty, image_path, content, solution, puzzle_code);
+        Puzzle puzzle = new Puzzle(title, difficulty, image_path, content, solution, puzzle_code);
 
         Hint hint1 = Hint.builder()
                 .content("content1")
@@ -66,8 +68,10 @@ public class HintServiceTest {
         hintService.register(hint2);
         hintService.register(hint3);
 
+        Puzzle findByIdPuzzle = puzzleRepository.findById(puzzle.getId()).orElse(null);
 
-        System.out.println(puzzleRepository.findOne(puzzle.getId()).getHints());
+
+        System.out.println(findByIdPuzzle.getHints());
 
 
         //then

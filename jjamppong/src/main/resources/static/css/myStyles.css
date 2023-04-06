@@ -6,6 +6,16 @@ a {
 /*   text-decoration-line: underline line-through overline; */
 }
 a:link {color:black; }
-a:visited {color:pink; }
+a:visited {color:black; }
 a:hover {color:red; }
-a:active { color:green; }
+a:active { color:black; }
+
+.layout{
+    width : 500px;
+    margin : 0 auto;
+    margin-top : 10px;
+}
+
+.margin1{
+    margin-left: 100px;
+}
