@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -21,15 +22,20 @@ public class PuzzleController {
     private final PuzzleService puzzleService;
 
     //퍼즐 상세페이지
-    @GetMapping("/puzzle/{puzzleId}")
-    public String detail(@PathVariable("puzzleId") String puzzleId, Model model){
+    @GetMapping("/puzzles/view/{puzzleId}")
+    public String detail(@PathVariable("puzzleId") Long puzzleId, Model model){
+        Puzzle puzzle = puzzleService.findOne(puzzleId);
+
+
+        model.addAttribute("puzzle", puzzle);
+        model.addAttribute("PuzzleAnswerSubmitForm", new PuzzleAnswerSubmitForm());
 
         return "puzzles/puzzleForm";
     }
 
 
     //페이징 처리해서 퍼즐 리스트를 보여줌
-    @GetMapping("/puzzles")
+    @GetMapping("/puzzles/list")
     public String list(Model model, @PageableDefault(page = 0, size = 25, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         Page<Puzzle> puzzles = puzzleService.findPuzzlesWithPaging(pageable);
 
@@ -46,6 +52,15 @@ public class PuzzleController {
 
         return "puzzles/puzzleBoard";
     }
+
+    @PostMapping("/puzzles/submit")
+    public String answerSubmit(PuzzleAnswerSubmitForm form){
+
+        System.out.println(form.getAnswer());
+        return "index";
+    }
+
+
 
 
 }
