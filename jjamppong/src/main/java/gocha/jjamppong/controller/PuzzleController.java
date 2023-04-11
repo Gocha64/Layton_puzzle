@@ -53,11 +53,24 @@ public class PuzzleController {
         return "puzzles/puzzleBoard";
     }
 
-    @PostMapping("/puzzles/submit")
-    public String answerSubmit(PuzzleAnswerSubmitForm form){
+    // 제출 시 처리
+    @PostMapping("/puzzles/submit/{puzzleId}")
+    public String answerSubmit(Model model, @PathVariable("puzzleId") Long puzzleId,PuzzleAnswerSubmitForm form){
+        Boolean check = puzzleService.checkAnswer(puzzleId, form);
 
-        System.out.println(form.getAnswer());
-        return "index";
+
+        if (check){
+            model.addAttribute("message", "정답입니다!");
+            model.addAttribute("searchUrl", "/puzzles/list");
+        }
+        else{
+            model.addAttribute("message", "오답입니다... 다시 한 번 풀어보세요.");
+            model.addAttribute("searchUrl", String.format("/puzzles/view/%d", puzzleId));
+        }
+
+        return "message";
+
+
     }
 
 

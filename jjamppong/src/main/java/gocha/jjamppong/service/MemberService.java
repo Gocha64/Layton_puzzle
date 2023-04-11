@@ -17,5 +17,6 @@ public class MemberService {
     public Long register(MemberDto member){
         return memberRepository.save(member.toEntity());
     }
+
 }
 

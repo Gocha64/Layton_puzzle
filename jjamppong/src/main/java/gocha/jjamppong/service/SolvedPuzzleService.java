@@ -14,9 +14,13 @@ public class SolvedPuzzleService {
 
     private final SolvedPuzzleRepository solvedPuzzleRepository;
 
+    //정답 처리시 해당 내용 등록
     @Transactional
     public Long register(SolvedPuzzle solvedPuzzle){
         solvedPuzzleRepository.save(solvedPuzzle);
         return solvedPuzzle.getId();
     }
+
+
+
 }

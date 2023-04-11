@@ -25,7 +25,7 @@
             <img th:src="${puzzle.image_path}"/>
             <p th:text = "${puzzle.content}"></p>
 
-            <form action = "/puzzles/submit" th:object = "${PuzzleAnswerSubmitForm}" method = "post" >
+            <form th:action = "@{/puzzles/submit/{id}(id = ${puzzle.id})}" th:object = "${PuzzleAnswerSubmitForm}" method = "post" >
                 <input type = "text" th:field="*{answer}">
                 <button type="submit">제출</button>
 
