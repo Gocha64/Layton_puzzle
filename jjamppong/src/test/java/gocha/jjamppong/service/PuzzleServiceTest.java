@@ -2,45 +2,52 @@ package gocha.jjamppong.service;
 
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.repository.PuzzleRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
+
+@ExtendWith(MockitoExtension.class)
 public class PuzzleServiceTest {
-    @Autowired PuzzleService puzzleService;
-    @Autowired PuzzleRepository puzzleRepository;
+    @InjectMocks
+    private PuzzleService puzzleService;
+
+    @Mock
+    private PuzzleRepository puzzleRepository;
 
     @Test
     public void 퍼즐등록() throws Exception{
         //given
-        Long difficulty = 40L;
-        String image_path = "/";
-        String title = "title";
-        String content = "content";
-        String solution = "solution";
-        String puzzle_code = "1-1";
         Puzzle puzzle = Puzzle.builder()
-                .title(title)
-                .difficulty(difficulty)
-                .content(content)
-                .solution(solution)
-                .image_path(image_path)
-                .puzzle_code(puzzle_code)
+                .title("title")
+                .difficulty(40L)
+                .content("content")
+                .solution("solution")
+                .image_path("/")
+                .puzzle_code("1-1")
                 .build();
+
+
+        // mock
+        when(puzzleRepository.save(any())).thenReturn(puzzle);
+        when(puzzleRepository.findById(any())).thenReturn(Optional.ofNullable(puzzle));
+
+
 
         //when
         Long savedId = puzzleService.register(puzzle);
 
         //then
-        assertEquals(puzzle, puzzleRepository.findById(savedId));
+        assertEquals(puzzle, puzzleRepository.findById(savedId).get());
     }
 
 
