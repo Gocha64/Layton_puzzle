@@ -11,21 +11,17 @@
         <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
         <!-- Page content-->
         <div class="container-fluid">
-            <h1 class="mt-4">Login</h1>
+            <h1 class="mt-4">Register</h1>
 
-            <form th:action = "@{/members/login}" th:object = "${LoginForm}" method = "post">
+            <form th:action = "@{/members/register}" th:object = "${RegisterForm}" method = "post">
                 <label>아이디</label><br>
                 <input th:field="*{userId}" type="text"><br><br>
 
                 <label>패스워드</label><br>
                 <input th:field="*{userPassword}" type="password"><br><br>
 
-                <button type="submit">로그인</button>
-            </form><br>
-            <button onClick="location.href='/members/register'">회원가입하기</button>
-
-
-
+                <button type="submit">회원가입</button>
+            </form>
 
 
 

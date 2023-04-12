@@ -19,8 +19,14 @@ public class MemberService {
 
     //회원가입
     @Transactional
-    public Long register(MemberDto member){
-        return memberRepository.save(member.toEntity());
+    public Long register(MemberDto memberDto){
+        Member member = memberDto.toEntity();
+        memberRepository.save(member);
+        return member.getId();
+    }
+
+    public Member findByName(String name){
+        return memberRepository.findByName(name);
     }
 
 
@@ -28,9 +34,12 @@ public class MemberService {
     public String authenticate(LoginForm form){
         
         //사용자 정보를 가져옴
-        //Member member = memberRepository.findbyName(form.getUserId());
+        Member member = findByName(form.getUserId());
         
         //사용자 인증
+        if (member == null || !member.getPassword().equals(form.getUserPassword())){
+            return "FAIL";
+        }
         
 
 
