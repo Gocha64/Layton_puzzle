@@ -12,7 +12,8 @@ logging:
         orm:
           jdbc:
             bind: trace
-
+      springframework:
+        security: DEBUG
 spring:
   datasource:
     driverClassName: org.mariadb.jdbc.Driver

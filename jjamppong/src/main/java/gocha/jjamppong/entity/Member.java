@@ -17,7 +17,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    private String name;
+    private String username;
 
     private String password;
 
@@ -33,8 +33,8 @@ public class Member {
     }
 
     @Builder
-    public Member(String name, String password, String cash) {
-        this.name = name;
+    public Member(String username, String password, String cash) {
+        this.username = username;
         this.password = password;
         this.cash = cash;
         this.solved_puzzles = new ArrayList<>();

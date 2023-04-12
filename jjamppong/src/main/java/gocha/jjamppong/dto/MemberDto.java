@@ -16,7 +16,7 @@ public class MemberDto {
 
     public Member toEntity(){
         return Member.builder()
-                .name(name)
+                .username(name)
                 .password(password)
                 .cash(cash)
                 .build();

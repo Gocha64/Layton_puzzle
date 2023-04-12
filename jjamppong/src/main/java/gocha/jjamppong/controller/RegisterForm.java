@@ -8,12 +8,13 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Getter
 @Setter
 public class RegisterForm {
 
     // 입력받은 아이디
-    private String userId;
+    private String username;
 
     // 입력받은 패스워드
     private String userPassword;

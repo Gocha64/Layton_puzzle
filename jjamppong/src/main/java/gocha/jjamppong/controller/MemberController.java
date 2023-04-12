@@ -34,43 +34,51 @@ public class MemberController {
         return "members/loginForm";
     }
 
-    @GetMapping("/members/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
-
-        return "redirect:/";
-    }
-
-
-
-    //로그인 처리
-    @PostMapping("/members/login")
-    public String loginProcess(Model model, LoginForm form, HttpServletRequest request){
-
-//        System.out.println(form.getUserId());
-//        System.out.println(form.getUserPassword());
-
-        if (memberService.authenticate(form).equals("SUCCESS")){
-
-            //세션 바인딩
-            HttpSession session = request.getSession(true);
-
-            session.setAttribute("USER", form);
-
-            LoginForm getForm = (LoginForm) session.getAttribute("USER");
-            model.addAttribute("message", getForm.getUserId());
-            model.addAttribute("searchUrl", "/");
-        }
-        else{
-            model.addAttribute("message", "등록되지 않은 사용자이거나 패스워드가 맞지않습니다.");
-            model.addAttribute("searchUrl", "/members/login");
-        }
-
-
+//    @GetMapping("/members/logout")
+//    public String logout(HttpServletRequest request) {
+//        HttpSession session = request.getSession();
+//        session.invalidate();
+//
+//        return "redirect:/";
+//    }
+    @GetMapping("/members/loginFail")
+    public String logout(Model model) {
+        model.addAttribute("message", "로그인에 실패했습니다.");
+        model.addAttribute("searchUrl", "/members/login");
 
         return "message";
     }
+
+
+
+
+//    //로그인 처리
+//    @PostMapping("/members/loginpro")
+//    public String loginProcess(Model model, LoginForm form, HttpServletRequest request){
+//
+////        System.out.println(form.getUserId());
+////        System.out.println(form.getUserPassword());
+//
+//        if (memberService.authenticate(form).equals("SUCCESS")){
+//
+//            //세션 바인딩
+//            HttpSession session = request.getSession(true);
+//
+//            session.setAttribute("USER", form);
+//
+//            LoginForm getForm = (LoginForm) session.getAttribute("USER");
+//            model.addAttribute("message", getForm.getUserId());
+//            model.addAttribute("searchUrl", "/");
+//        }
+//        else{
+//            model.addAttribute("message", "등록되지 않은 사용자이거나 패스워드가 맞지않습니다.");
+//            model.addAttribute("searchUrl", "/members/login");
+//        }
+//
+//
+//
+//        return "message";
+//    }
 
     // 회원가입 페이지 이동
     @GetMapping("/members/register")
@@ -81,11 +89,11 @@ public class MemberController {
     }
 
     // 회원가입 처리
-    @PostMapping("/members/register")
+    @PostMapping("/members/registerpro")
     public String register(Model model, RegisterForm form){
         model.addAttribute("RegisterForm", new RegisterForm());
         MemberDto memberDto = MemberDto.builder()
-                .name(form.getUserId())
+                .name(form.getUsername())
                 .password(form.getUserPassword())
                 .build();
 

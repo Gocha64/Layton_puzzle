@@ -62,7 +62,7 @@ class MemberRepositoryTest {
         //when
         memberRepository.save(member);
 
-        Member findbyNameMember = memberRepository.findbyName(member.getName());
+        Member findbyNameMember = memberRepository.findbyName(member.getUsername());
 
         //then
         assertEquals(member, findbyNameMember);
