@@ -11,6 +11,11 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/puzzles/list">Puzzles</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">!Events</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">!Profile</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">!Status</a>
+        <form action="/members/logout" method="POST">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#" onclick="this.parentNode.submit()">Logout</a>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </form>
+
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">!Extra</a>
     </div>
 </div>
