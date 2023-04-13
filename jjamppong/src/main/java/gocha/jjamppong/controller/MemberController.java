@@ -97,10 +97,17 @@ public class MemberController {
                 .password(form.getUserPassword())
                 .build();
 
-        memberService.register(memberDto);
+        Long result = memberService.register(memberDto);
 
-        model.addAttribute("searchUrl", "/");
-        model.addAttribute("message", "회원가입하신 것을 축하드립니다");
+        if (result == -1l){
+            model.addAttribute("searchUrl", "/members/register");
+            model.addAttribute("message", "중복된 ID입니다");
+        }
+        else{
+            model.addAttribute("searchUrl", "/");
+            model.addAttribute("message", "회원가입하신 것을 축하드립니다");
+        }
+
         return "message";
     }
 

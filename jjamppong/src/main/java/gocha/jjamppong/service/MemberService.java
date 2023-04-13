@@ -43,11 +43,18 @@ public class MemberService implements UserDetailsService {
     //회원가입
     @Transactional
     public Long register(MemberDto memberDto){
-        String p = passwordEncoder.encode(memberDto.getPassword());
-        memberDto.setPassword(p);
-        Member member = memberDto.toEntity();
-        memberRepository.save(member);
-        return member.getId();
+
+        if(memberRepository.findByUsername(memberDto.getName()) == null){
+            String p = passwordEncoder.encode(memberDto.getPassword());
+            memberDto.setPassword(p);
+            Member member = memberDto.toEntity();
+            memberRepository.save(member);
+            return member.getId();
+        }
+
+        return -1l;
+
+
     }
 
     public Member findByName(String name){
