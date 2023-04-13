@@ -21,6 +21,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/puzzles/list").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form

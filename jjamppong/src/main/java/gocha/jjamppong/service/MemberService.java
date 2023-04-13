@@ -32,7 +32,10 @@ public class MemberService implements UserDetailsService {
 
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if (member.getUsername().equals("Admin"))
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        else
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new User(member.getUsername(), member.getPassword(), authorities);
     }
