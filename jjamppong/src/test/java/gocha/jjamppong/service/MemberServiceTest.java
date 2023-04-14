@@ -35,7 +35,6 @@ public class MemberServiceTest {
         MemberDto memberDto = new MemberDto("kim", "1234", "0");
         member = memberDto.toEntity();
 
-        given(memberRepository.save(member)).willReturn(1L);
 
         //when
         memberService.register(memberDto);

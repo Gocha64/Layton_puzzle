@@ -20,6 +20,7 @@ public class SecurityConfig {
 //                    .disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/members/register").permitAll()
                         .requestMatchers("/puzzles/list").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()

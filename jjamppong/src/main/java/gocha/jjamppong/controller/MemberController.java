@@ -85,7 +85,7 @@ public class MemberController {
     public String registerProcess(Model model){
         model.addAttribute("RegisterForm", new RegisterForm());
 
-        return "/members/registerForm";
+        return "members/registerForm";
     }
 
     // 회원가입 처리
