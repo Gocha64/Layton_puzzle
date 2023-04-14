@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Sidebar-->
+<th:block th:fragment="sidebarSelect">
+    <th:block th:if="${role}=='[ROLE_USER]'"><div th:replace="~{fragments/sidebarForLogin :: sidebar}"/></th:block>
+    <th:block th:if="${role}=='[ROLE_ADMIN]'" ><div th:replace="~{fragments/sidebarForAdmin :: sidebar}"/></th:block>
+    <th:block th:if="${role}==null" ><div th:replace="~{fragments/sidebar :: sidebar}"/></th:block>
+</th:block>

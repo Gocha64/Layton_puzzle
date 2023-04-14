@@ -5,9 +5,12 @@ import gocha.jjamppong.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -15,6 +18,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @ModelAttribute
+    public void addRole(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails){
+            model.addAttribute("role", ((UserDetails)principal).getAuthorities().toString());
+            model.addAttribute("userName", ((UserDetails)principal).getUsername());
+        }
+        else{
+            model.addAttribute("role", null);
+            model.addAttribute("userName", null);
+        }
+    }
 
     @GetMapping("/members/login")
     public String login(Model model, HttpServletRequest request){

@@ -6,7 +6,10 @@
 <div class="border-end bg-white" id="sidebar-wrapper" th:fragment="sidebar">
     <div class="sidebar-heading border-bottom bg-light">관리자 전용</div>
     <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/logout">Logout</a>
+        <form action="/members/logout" method="POST">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#" onclick="this.parentNode.submit()">Logout</a>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </form>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/mypage">MyPage</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/puzzles/list">Puzzles</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">!Events</a>
