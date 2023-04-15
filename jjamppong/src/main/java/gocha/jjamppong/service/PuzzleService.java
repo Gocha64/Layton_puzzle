@@ -1,7 +1,7 @@
 package gocha.jjamppong.service;
 
 
-import gocha.jjamppong.controller.PuzzleAnswerSubmitForm;
+import gocha.jjamppong.form.PuzzleAnswerSubmitForm;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.repository.PuzzleRepository;
 import lombok.RequiredArgsConstructor;

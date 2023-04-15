@@ -1,6 +1,5 @@
 package gocha.jjamppong.service;
 
-import gocha.jjamppong.controller.LoginForm;
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.repository.MemberRepository;
@@ -56,6 +55,8 @@ public class MemberService implements UserDetailsService {
 
 
     }
+
+
 
     public Member findByName(String name){
         return memberRepository.findByUsername(name);

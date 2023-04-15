@@ -21,6 +21,13 @@ public class SolvedPuzzleService {
         return solvedPuzzle.getId();
     }
 
+    //퍼즐을 이미 푼적 있는지 확인
+    public boolean checkSolve(Long memberId, Long puzzleId){
+        if (solvedPuzzleRepository.findbyMemberIdNPuzzleId(memberId, puzzleId).isEmpty())
+            return false;
+        return true;
+    }
+
 
 
 }

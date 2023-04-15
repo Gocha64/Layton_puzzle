@@ -31,4 +31,16 @@ public class SolvedPuzzleRepository {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+    //퍼즐 id와 멤버 id로 해당하는 이력이 있는지 조회
+    public List<SolvedPuzzle> findbyMemberIdNPuzzleId(Long memberId, Long puzzleId){
+        return em.createQuery(
+                "SELECT s " +
+                        "FROM SolvedPuzzle s " +
+                        "where s.member.id = :memberId and s.puzzle.id = :puzzleId", SolvedPuzzle.class)
+                .setParameter("puzzleId", puzzleId)
+                .setParameter("memberId", memberId)
+                .getResultList();
+
+    }
 }

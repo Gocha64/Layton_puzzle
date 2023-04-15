@@ -50,7 +50,6 @@ public class HomeController {
     }
 
     /*
-    권한별 sidebar 보여주기
     퍼즐 정답 처리
     맞춘 퍼즐들 조회
     문자열 트리밍

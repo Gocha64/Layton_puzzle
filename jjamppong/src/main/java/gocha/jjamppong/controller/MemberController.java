@@ -1,6 +1,7 @@
 package gocha.jjamppong.controller;
 
 import gocha.jjamppong.dto.MemberDto;
+import gocha.jjamppong.form.LoginForm;
 import gocha.jjamppong.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -99,15 +100,15 @@ public class MemberController {
     // 회원가입 페이지 이동
     @GetMapping("/members/register")
     public String registerProcess(Model model){
-        model.addAttribute("RegisterForm", new RegisterForm());
+        model.addAttribute("RegisterForm", new LoginForm());
 
         return "members/registerForm";
     }
 
     // 회원가입 처리
     @PostMapping("/members/registerpro")
-    public String register(Model model, RegisterForm form){
-        model.addAttribute("RegisterForm", new RegisterForm());
+    public String register(Model model, LoginForm form){
+        model.addAttribute("RegisterForm", new LoginForm());
         MemberDto memberDto = MemberDto.builder()
                 .name(form.getUsername())
                 .password(form.getUserPassword())

@@ -1,7 +1,12 @@
 package gocha.jjamppong.controller;
 
+import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
+import gocha.jjamppong.entity.SolvedPuzzle;
+import gocha.jjamppong.form.PuzzleAnswerSubmitForm;
+import gocha.jjamppong.service.MemberService;
 import gocha.jjamppong.service.PuzzleService;
+import gocha.jjamppong.service.SolvedPuzzleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,13 +21,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class PuzzleController {
 
     private final PuzzleService puzzleService;
+    private final MemberService memberService;
+    private final SolvedPuzzleService solvedPuzzleService;
+
 
     @ModelAttribute
     public void addRole(Model model){
@@ -78,6 +84,22 @@ public class PuzzleController {
         if (check){
             model.addAttribute("message", "정답입니다!");
             model.addAttribute("searchUrl", "/puzzles/list");
+
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Puzzle puzzle = puzzleService.findOne(puzzleId);
+            Member member = memberService.findByName(((UserDetails)principal).getUsername());
+
+            SolvedPuzzle solvedPuzzle = SolvedPuzzle.builder()
+                    .member(member)
+                    .puzzle(puzzle)
+                    .score(puzzle.getDifficulty())
+                    .build();
+
+            // 이미 정답을 맟춘적이 있는지 확인
+            if(!solvedPuzzleService.checkSolve(member.getId(), puzzle.getId())){
+                solvedPuzzleService.register(solvedPuzzle);
+            }
+
         }
         else{
             model.addAttribute("message", "오답입니다... 다시 한 번 풀어보세요.");
