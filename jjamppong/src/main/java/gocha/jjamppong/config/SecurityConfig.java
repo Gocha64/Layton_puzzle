@@ -1,4 +1,4 @@
-package gocha.jjamppong;
+package gocha.jjamppong.config;
 
 
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/members/register").permitAll()
-                        .requestMatchers("/puzzles/list").authenticated()
+                        .requestMatchers("/puzzles/**").authenticated()
+                        .requestMatchers("/members/mypage").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )

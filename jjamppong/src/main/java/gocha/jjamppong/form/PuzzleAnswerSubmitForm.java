@@ -1,4 +1,4 @@
-package gocha.jjamppong.controller;
+package gocha.jjamppong.form;
 
 
 import lombok.AllArgsConstructor;

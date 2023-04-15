@@ -1,4 +1,4 @@
-package gocha.jjamppong.controller;
+package gocha.jjamppong.form;
 
 
 import lombok.AllArgsConstructor;
@@ -8,10 +8,9 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Getter
 @Setter
-public class RegisterForm {
+public class LoginForm {
 
     // 입력받은 아이디
     private String username;

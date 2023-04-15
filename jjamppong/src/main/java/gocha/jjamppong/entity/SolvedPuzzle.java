@@ -4,11 +4,13 @@ package gocha.jjamppong.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Table(name = "solved_puzzle")
+@NoArgsConstructor
 public class SolvedPuzzle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +33,9 @@ public class SolvedPuzzle {
 
 
     @Builder
-    public SolvedPuzzle(Long score) {
+    public SolvedPuzzle(Member member, Puzzle puzzle, Long score) {
+        this.member = member;
+        this.puzzle = puzzle;
         this.score = score;
 
     }
