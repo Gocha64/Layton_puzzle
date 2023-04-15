@@ -12,19 +12,14 @@
 
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
+                    <h1 class="mt-4">Simple Puzzle</h1>
+                    <br>
+                    <h2 th:if="${userName}==null" th:text="${'Welcome to Simple Puzzle!!'}"></h2>
+                    <h2 th:unless="${userName}==null" th:text="${'Welcome to Simple Puzzle, ' + username + '!!'}"></h2>
+                    <br>
+                    <br>
+                    <h5>You can solve countless puzzles and riddles on Simple Puzzle after a simple signup!</h5>
 
-                    <h2 th:if="${isLogin}==true" th:text="${'환영합니다, ' + username}"></h2>
-                    <h3 th:if="${authority}!=null" th:text="${'등급: ' + authority}"></h3>
-
-                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                    <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
-                    </p>
                 </div>
             </div>
         </div>

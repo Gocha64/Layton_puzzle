@@ -3,6 +3,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: header}" />
 <body>
+<style>
+    p {
+	height: 50%;
+	width: 50%;
+	}
+
+
+</style>
 <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
     <div th:replace="~{fragments/sidebarWithRole :: sidebarSelect}"/>
@@ -20,8 +28,6 @@
                 <button type="submit">제출</button>
 
             </form>
-
-
         </div>
     </div>
 
