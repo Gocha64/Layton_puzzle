@@ -1,4 +1,4 @@
-package gocha.jjamppong.form;
+package gocha.jjamppong.dto;
 
 
 import lombok.AllArgsConstructor;
