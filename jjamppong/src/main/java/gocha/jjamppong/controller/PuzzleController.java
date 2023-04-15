@@ -4,7 +4,7 @@ import gocha.jjamppong.dto.PuzzleResponseDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolvedPuzzle;
-import gocha.jjamppong.form.PuzzleAnswerSubmitForm;
+import gocha.jjamppong.dto.PuzzleAnswerSubmitForm;
 import gocha.jjamppong.service.MemberService;
 import gocha.jjamppong.service.PuzzleService;
 import gocha.jjamppong.service.SolvedPuzzleService;

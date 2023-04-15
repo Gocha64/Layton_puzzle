@@ -2,6 +2,8 @@ package gocha.jjamppong.repository;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolvedPuzzle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,7 @@ public interface SolvedPuzzleRepository extends JpaRepository<SolvedPuzzle, Long
     Optional<SolvedPuzzle> findById(Long id);
     List<SolvedPuzzle> findAllByPuzzle(Puzzle puzzle);
     List<SolvedPuzzle> findAllByMember(Member Member);
+    Page<SolvedPuzzle> findAllByMember(Member Member, Pageable pageable);
     List<SolvedPuzzle> findByMemberAndPuzzle(Member Member, Puzzle puzzle);
 
 //    private final EntityManager em;

@@ -7,6 +7,8 @@ import gocha.jjamppong.entity.SolvedPuzzle;
 import gocha.jjamppong.repository.PuzzleRepository;
 import gocha.jjamppong.repository.SolvedPuzzleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,11 @@ public class SolvedPuzzleService {
 
     public List<SolvedPuzzle> findAllbyMember(Member member){
         return solvedPuzzleRepository.findAllByMember(member);
+    }
+
+    // 퍼즐 페이징 처리
+    public Page<SolvedPuzzle> findSolvedPuzzlesWithPaging(Member member, Pageable pageable) {
+        return solvedPuzzleRepository.findAllByMember(member, pageable);
     }
 
 

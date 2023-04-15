@@ -1,11 +1,20 @@
 package gocha.jjamppong.controller;
 
 import gocha.jjamppong.dto.MemberDto;
-import gocha.jjamppong.form.LoginForm;
+import gocha.jjamppong.dto.PuzzleResponseDto;
+import gocha.jjamppong.entity.Member;
+import gocha.jjamppong.entity.Puzzle;
+import gocha.jjamppong.entity.SolvedPuzzle;
+import gocha.jjamppong.dto.LoginForm;
 import gocha.jjamppong.service.MemberService;
+import gocha.jjamppong.service.SolvedPuzzleService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
 
     private final MemberService memberService;
+    private final SolvedPuzzleService solvedPuzzleService;
 
     @ModelAttribute
     public void addRole(Model model){
@@ -33,6 +43,7 @@ public class MemberController {
         }
     }
 
+
     @GetMapping("/members/login")
     public String login(Model model, HttpServletRequest request){
 
@@ -41,23 +52,14 @@ public class MemberController {
         HttpSession session = request.getSession(true);
         LoginForm getForm = (LoginForm) session.getAttribute("USER");
 
-
         // 이미 로그인 했다면 메인 페이지로 이동동
        if (getForm != null){
             return "redirect:/";
         }
 
-
         return "members/loginForm";
     }
 
-//    @GetMapping("/members/logout")
-//    public String logout(HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        session.invalidate();
-//
-//        return "redirect:/";
-//    }
     @GetMapping("/members/loginFail")
     public String logout(Model model) {
         model.addAttribute("message", "로그인에 실패했습니다.");
@@ -66,36 +68,33 @@ public class MemberController {
         return "message";
     }
 
+    @GetMapping("/members/mypage")
+    public String myPage(Model model, @PageableDefault(page = 0, size = 25, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
+        Member member;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails){
+            member = memberService.findByName(((UserDetails)principal).getUsername());
+            Page<PuzzleResponseDto> solvedPuzzles =
+                    solvedPuzzleService.findSolvedPuzzlesWithPaging(member, pageable).map(PuzzleResponseDto::toResponseDto);
 
+            int nowPage = solvedPuzzles.getPageable().getPageNumber() + 1;
+            int startPage = Math.max(nowPage - 4, 1);
+            int endPage = Math.min(nowPage + 5, solvedPuzzles.getTotalPages());
+            int totalPage = solvedPuzzles.getTotalPages();
 
-//    //로그인 처리
-//    @PostMapping("/members/loginpro")
-//    public String loginProcess(Model model, LoginForm form, HttpServletRequest request){
-//
-////        System.out.println(form.getUserId());
-////        System.out.println(form.getUserPassword());
-//
-//        if (memberService.authenticate(form).equals("SUCCESS")){
-//
-//            //세션 바인딩
-//            HttpSession session = request.getSession(true);
-//
-//            session.setAttribute("USER", form);
-//
-//            LoginForm getForm = (LoginForm) session.getAttribute("USER");
-//            model.addAttribute("message", getForm.getUserId());
-//            model.addAttribute("searchUrl", "/");
-//        }
-//        else{
-//            model.addAttribute("message", "등록되지 않은 사용자이거나 패스워드가 맞지않습니다.");
-//            model.addAttribute("searchUrl", "/members/login");
-//        }
-//
-//
-//
-//        return "message";
-//    }
+            model.addAttribute("solvedPuzzles", solvedPuzzles);
+            model.addAttribute("nowPage", nowPage);
+            model.addAttribute("startPage", startPage);
+            model.addAttribute("endPage", endPage);
+            model.addAttribute("totalPage", totalPage);
+        }
+        else{
+            model.addAttribute("solvedPuzzles", new SolvedPuzzle());
+        }
+
+        return "members/solvedPuzzleList";
+    }
 
     // 회원가입 페이지 이동
     @GetMapping("/members/register")
