@@ -1,6 +1,7 @@
 package gocha.jjamppong.entity;
 
 
+import gocha.jjamppong.dto.PuzzleResponseDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,4 +58,6 @@ public class Puzzle {
         this.puzzle_code = puzzle_code;
         this.solved_puzzles = new ArrayList<>();
     }
+
+
 }

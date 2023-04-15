@@ -1,5 +1,6 @@
 package gocha.jjamppong.controller;
 
+import gocha.jjamppong.dto.PuzzleResponseDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolvedPuzzle;
@@ -59,7 +60,10 @@ public class PuzzleController {
     //페이징 처리해서 퍼즐 리스트를 보여줌
     @GetMapping("/puzzles/list")
     public String list(Model model, @PageableDefault(page = 0, size = 25, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        Page<Puzzle> puzzles = puzzleService.findPuzzlesWithPaging(pageable);
+//        Page<Puzzle> puzzles = puzzleService.findPuzzlesWithPaging(pageable);
+        Page<PuzzleResponseDto> puzzles =
+                puzzleService.findPuzzlesWithPaging(pageable).map(PuzzleResponseDto::toResponseDto);
+
 
         int nowPage = puzzles.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
@@ -96,7 +100,7 @@ public class PuzzleController {
                     .build();
 
             // 이미 정답을 맟춘적이 있는지 확인
-            if(!solvedPuzzleService.checkSolve(member.getId(), puzzle.getId())){
+            if(!solvedPuzzleService.checkSolve(member, puzzle)){
                 solvedPuzzleService.register(solvedPuzzle);
             }
 
