@@ -1,11 +1,17 @@
 package gocha.jjamppong.service;
 
 
+import gocha.jjamppong.entity.Member;
+import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolvedPuzzle;
+import gocha.jjamppong.repository.PuzzleRepository;
 import gocha.jjamppong.repository.SolvedPuzzleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,11 +28,17 @@ public class SolvedPuzzleService {
     }
 
     //퍼즐을 이미 푼적 있는지 확인
-    public boolean checkSolve(Long memberId, Long puzzleId){
-        if (solvedPuzzleRepository.findbyMemberIdNPuzzleId(memberId, puzzleId).isEmpty())
+    public boolean checkSolve(Member member, Puzzle puzzle){
+        if (solvedPuzzleRepository.findByMemberAndPuzzle(member, puzzle).isEmpty())
             return false;
         return true;
     }
+
+    public List<SolvedPuzzle> findAllbyMember(Member member){
+        return solvedPuzzleRepository.findAllByMember(member);
+    }
+
+
 
 
 
