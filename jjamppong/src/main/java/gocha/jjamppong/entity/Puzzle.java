@@ -1,7 +1,6 @@
 package gocha.jjamppong.entity;
 
 
-import gocha.jjamppong.dto.PuzzleResponseDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +24,9 @@ public class Puzzle {
     @OneToMany(mappedBy = "puzzle")
     private List<Hint> hints = new ArrayList<>();
 
+    @OneToOne(mappedBy = "puzzle")
+    private SolutionDetail solutionDetail;
+
     private String title;
 
     private Long difficulty;
@@ -36,6 +38,7 @@ public class Puzzle {
     private String solution;
 
     private String puzzle_code;
+
 
     public void addSolved_puzzle(SolvedPuzzle solvedPuzzle){
         solved_puzzles.add(solvedPuzzle);
