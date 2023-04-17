@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" />
+<body>
+<style>
+    p {
+	height: 50%;
+	width: 50%;
+	}
+
+
+</style>
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar-->
+  <div th:replace="~{fragments/sidebarWithRole :: sidebarSelect}"/>
+  <!-- Page content wrapper-->
+  <div id="page-content-wrapper">
+    <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
+    <!-- Page content-->
+    <div class="container-fluid">
+      <h1 class="mt-4" th:text = "${solution.title}">Puzzle Title</h1>
+      <img th:src="${solution.image_path}"/>
+      <p th:text = "${solution.content}"></p>
+
+
+      <button onclick="location.href='/'">리스트로 돌아가기</button>
+
+    </div>
+  </div>
+
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>
