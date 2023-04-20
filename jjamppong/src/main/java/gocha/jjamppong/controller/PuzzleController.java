@@ -3,6 +3,7 @@ package gocha.jjamppong.controller;
 import gocha.jjamppong.dto.PuzzleResponseDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
+import gocha.jjamppong.entity.SolutionDetail;
 import gocha.jjamppong.entity.SolvedPuzzle;
 import gocha.jjamppong.dto.PuzzleAnswerSubmitForm;
 import gocha.jjamppong.service.MemberService;
@@ -84,11 +85,7 @@ public class PuzzleController {
     public String answerSubmit(Model model, @PathVariable("puzzleId") Long puzzleId,PuzzleAnswerSubmitForm form){
         Boolean check = puzzleService.checkAnswer(puzzleId, form);
 
-
         if (check){
-            model.addAttribute("message", "정답입니다!");
-            model.addAttribute("searchUrl", "/puzzles/list");
-
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Puzzle puzzle = puzzleService.findOne(puzzleId);
             Member member = memberService.findByName(((UserDetails)principal).getUsername());
@@ -104,13 +101,24 @@ public class PuzzleController {
                 solvedPuzzleService.register(solvedPuzzle);
             }
 
+            // 해설 페이지가 없다면?
+            SolutionDetail solutionDetail = puzzle.getSolutionDetail();
+
+            if (solutionDetail != null)
+                model.addAttribute("solution", puzzle.getSolutionDetail());
+            else
+                model.addAttribute("solution", SolutionDetail.builder().content("").image_path("").build());
+
+            return String.format("puzzles/solution");
+
         }
         else{
             model.addAttribute("message", "오답입니다... 다시 한 번 풀어보세요.");
             model.addAttribute("searchUrl", String.format("/puzzles/view/%d", puzzleId));
+
+            return "message";
         }
 
-        return "message";
 
 
     }

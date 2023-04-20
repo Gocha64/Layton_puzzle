@@ -19,12 +19,12 @@
     <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
     <!-- Page content-->
     <div class="container-fluid">
-      <h1 class="mt-4" th:text = "${solution.title}">Puzzle Title</h1>
+      <h1 class="mt-4">Correct!</h1>
       <img th:src="${solution.image_path}"/>
       <p th:text = "${solution.content}"></p>
 
 
-      <button onclick="location.href='/'">리스트로 돌아가기</button>
+      <button onclick="location.href='/puzzles/list'">return to list</button>
 
     </div>
   </div>

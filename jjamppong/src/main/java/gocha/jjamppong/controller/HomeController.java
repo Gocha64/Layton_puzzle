@@ -51,7 +51,6 @@ public class HomeController {
 
     /*
     정답 처리후 해설 페이지
-    문자열 트리밍
     관리자 페이지
     관리자 퍼즐등록/삭제
      */
