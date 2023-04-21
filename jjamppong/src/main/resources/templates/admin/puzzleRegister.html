@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" />
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div th:replace="~{fragments/sidebarWithRole :: sidebarSelect}"/>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
+        <!-- Page content-->
+        <div class="container-fluid">
+            <h1 class="mt-4">Register</h1>
+
+            <form th:action = "@{/puzzles/registerpro}" th:object = "${PuzzleRegisterForm}" method = "post">
+                <label>Title</label><br>
+                <input th:field="*{title}" type="text"><br><br>
+
+                <label>puzzle code</label><br>
+                <input th:field="*{puzzle_code}" type="text"><br><br>
+
+                <label>difficulty</label><br>
+                <input th:field="*{difficulty}" type="text"><br><br>
+
+                <label>Content</label><br>
+                <input th:field="*{content}" type="text"><br><br>
+
+                <label>Solution</label><br>
+                <input th:field="*{solution}" type="text"><br><br>
+
+                <button type="submit">register</button>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

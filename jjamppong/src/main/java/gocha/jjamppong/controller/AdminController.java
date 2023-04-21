@@ -1,6 +1,7 @@
 package gocha.jjamppong.controller;
 
 
+import gocha.jjamppong.dto.PuzzleRegisterForm;
 import gocha.jjamppong.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +32,12 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminIndex(Model model){
         return "admin/adminEx";
+    }
+
+    @GetMapping("/admin/puzzle/register")
+    public String registerPuzzle(Model model){
+        model.addAttribute("PuzzleRegisterForm", new PuzzleRegisterForm());
+        return "admin/puzzleRegister";
     }
 
 

@@ -1,5 +1,6 @@
 package gocha.jjamppong.controller;
 
+import gocha.jjamppong.dto.PuzzleRegisterForm;
 import gocha.jjamppong.dto.PuzzleResponseDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
@@ -119,8 +120,11 @@ public class PuzzleController {
             return "message";
         }
 
+    }
 
-
+    @PostMapping("/puzzles/registerpro")
+    public String register(Model model, PuzzleRegisterForm form){
+        return "redirect:/";
     }
 
 

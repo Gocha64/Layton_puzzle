@@ -18,13 +18,13 @@ public class Puzzle {
     @Column(name = "puzzle_id")
     private Long id;
 
-    @OneToMany(mappedBy = "puzzle")
+    @OneToMany(mappedBy = "puzzle", cascade = CascadeType.ALL)
     private List<SolvedPuzzle> solved_puzzles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "puzzle")
+    @OneToMany(mappedBy = "puzzle", cascade = CascadeType.ALL)
     private List<Hint> hints = new ArrayList<>();
 
-    @OneToOne(mappedBy = "puzzle")
+    @OneToOne(mappedBy = "puzzle", cascade = CascadeType.ALL)
     private SolutionDetail solutionDetail;
 
     private String title;
