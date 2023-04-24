@@ -71,7 +71,7 @@ public class HintServiceTest {
         Puzzle findByIdPuzzle = puzzleRepository.findById(puzzle.getId()).orElse(null);
 
 
-        System.out.println(findByIdPuzzle.getHints());
+//        System.out.println(findByIdPuzzle.getHints());
 
 
         //then

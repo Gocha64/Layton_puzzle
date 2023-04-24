@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    password: '0000'
+    username: root
+    url: jdbc:mariadb://localhost:3306/Jjamppong

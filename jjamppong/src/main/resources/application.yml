@@ -11,25 +11,33 @@ logging:
       hibernate:
         orm:
           jdbc:
-            bind: trace
+#            bind: trace
+            bind: INFO
       springframework:
-        security: DEBUG
+#        security: DEBUG
+        security: INFO
 spring:
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    password: '0000'
-    username: root
-    url: jdbc:mariadb://localhost:3306/Jjamppong
+
 
   jpa:
     properties:
       hibernate:
-        highlight_sql: 'true'
-        format_sql: 'true'
-        show_sql: 'true'
+#        highlight_sql: 'true'
+#        format_sql: 'true'
+#        show_sql: 'true'
     hibernate:
       ddl-auto: update
 
 #  profiles:
-#    include: db
+#    include: localdb
+
+  profiles:
+    include: rdsdb
+
+#  profiles:
+#    include: dockerdb
+
+
 
