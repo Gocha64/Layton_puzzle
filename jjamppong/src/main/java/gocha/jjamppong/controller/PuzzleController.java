@@ -11,6 +11,7 @@ import gocha.jjamppong.service.MemberService;
 import gocha.jjamppong.service.PuzzleService;
 import gocha.jjamppong.service.SolvedPuzzleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -61,10 +62,11 @@ public class PuzzleController {
 
     //페이징 처리해서 퍼즐 리스트를 보여줌
     @GetMapping("/puzzles/list")
+
     public String list(Model model, @PageableDefault(page = 0, size = 25, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 //        Page<Puzzle> puzzles = puzzleService.findPuzzlesWithPaging(pageable);
         Page<PuzzleResponseDto> puzzles =
-                puzzleService.findPuzzlesWithPaging(pageable).map(PuzzleResponseDto::toResponseDto);
+                puzzleService.findPuzzlesWithPaging(pageable);
 
 
         int nowPage = puzzles.getPageable().getPageNumber() + 1;

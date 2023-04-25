@@ -11,14 +11,20 @@ logging:
       hibernate:
         orm:
           jdbc:
-#            bind: trace
-            bind: INFO
+            bind: trace
+#            bind: INFO
       springframework:
 #        security: DEBUG
         security: INFO
 spring:
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
+  cache:
+    # redis를 이미지 명으로 접속
+    type: redis
+  redis:
+    host: redis
+    port: 6379
 
 
   jpa:
@@ -28,7 +34,7 @@ spring:
 #        format_sql: 'true'
 #        show_sql: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
 #  profiles:
 #    include: localdb

@@ -4,6 +4,7 @@ import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
