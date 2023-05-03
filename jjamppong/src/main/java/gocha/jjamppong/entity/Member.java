@@ -1,6 +1,7 @@
 package gocha.jjamppong.entity;
 
 
+import gocha.jjamppong.enums.UserAuthority;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<SolvedPuzzle> solved_puzzles;
 
+    @Enumerated(EnumType.STRING)
+    private UserAuthority authority;
+
 
     public void addSolved_puzzle(SolvedPuzzle solvedPuzzle){
         solved_puzzles.add(solvedPuzzle);
@@ -33,10 +37,11 @@ public class Member {
     }
 
     @Builder
-    public Member(String username, String password, String cash) {
+    public Member(String username, String password, String cash, UserAuthority authority) {
         this.username = username;
         this.password = password;
         this.cash = cash;
         this.solved_puzzles = new ArrayList<>();
+        this.authority = authority;
     }
 }

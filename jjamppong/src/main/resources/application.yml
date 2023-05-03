@@ -23,7 +23,7 @@ spring:
     # redis를 이미지 명으로 접속
     type: redis
   redis:
-    host: redis
+    host: localhost
     port: 6379
 
 
@@ -34,13 +34,13 @@ spring:
 #        format_sql: 'true'
 #        show_sql: 'true'
     hibernate:
-      ddl-auto: validate
-
-#  profiles:
-#    include: localdb
+      ddl-auto: update
 
   profiles:
-    include: rdsdb
+    include: localdb
+
+#  profiles:
+#    include: rdsdb
 
 #  profiles:
 #    include: dockerdb

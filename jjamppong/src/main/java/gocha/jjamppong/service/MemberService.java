@@ -2,6 +2,7 @@ package gocha.jjamppong.service;
 
 import gocha.jjamppong.dto.MemberDto;
 import gocha.jjamppong.entity.Member;
+import gocha.jjamppong.enums.UserAuthority;
 import gocha.jjamppong.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,7 +33,7 @@ public class MemberService implements UserDetailsService {
 
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (member.getUsername().equals("Admin"))
+        if (member.getAuthority() == UserAuthority.ROLE_ADMIN)
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         else
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

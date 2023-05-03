@@ -6,6 +6,7 @@ import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolvedPuzzle;
 import gocha.jjamppong.dto.LoginForm;
+import gocha.jjamppong.enums.UserAuthority;
 import gocha.jjamppong.service.MemberService;
 import gocha.jjamppong.service.SolvedPuzzleService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -113,6 +114,7 @@ public class MemberController {
         MemberDto memberDto = MemberDto.builder()
                 .name(form.getUsername())
                 .password(form.getUserPassword())
+                .authority(UserAuthority.ROLE_USER)
                 .build();
 
         Long result = memberService.register(memberDto);
