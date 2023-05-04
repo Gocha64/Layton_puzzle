@@ -2,6 +2,7 @@ package gocha.jjamppong.controller;
 
 import gocha.jjamppong.dto.PuzzleRegisterForm;
 import gocha.jjamppong.dto.PuzzleResponseDto;
+import gocha.jjamppong.dto.SolutionResponseDto;
 import gocha.jjamppong.entity.Member;
 import gocha.jjamppong.entity.Puzzle;
 import gocha.jjamppong.entity.SolutionDetail;
@@ -110,17 +111,20 @@ public class PuzzleController {
 
             // 해설 페이지가 없다면?
             SolutionDetail solutionDetail = puzzle.getSolutionDetail();
-
-            if (solutionDetail != null)
-                model.addAttribute("solution", puzzle.getSolutionDetail());
+            SolutionResponseDto solutionDto;
+            if (solutionDetail != null){
+                solutionDto = SolutionResponseDto.toResponseDto(solutionDetail);
+                solutionDto.ChangeContentNewlineTrim();
+                model.addAttribute("solution", solutionDto);
+            }
             else
-                model.addAttribute("solution", SolutionDetail.builder().content("").image_path("").build());
+                model.addAttribute("solution", SolutionResponseDto.builder().content("").image_path("").build());
 
             return String.format("puzzles/solution");
 
         }
         else{
-            model.addAttribute("message", "오답입니다... 다시 한 번 풀어보세요.");
+            model.addAttribute("message", "wrong... try again.");
             model.addAttribute("searchUrl", String.format("/puzzles/view/%d", puzzleId));
 
             return "message";

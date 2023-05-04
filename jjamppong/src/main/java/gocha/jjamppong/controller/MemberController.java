@@ -65,7 +65,7 @@ public class MemberController {
     @GetMapping("/members/loginFail")
 
     public String logout(Model model) {
-        model.addAttribute("message", "로그인에 실패했습니다.");
+        model.addAttribute("message", "");
         model.addAttribute("searchUrl", "/members/login");
 
         return "message";
@@ -101,7 +101,7 @@ public class MemberController {
 
     // 회원가입 페이지 이동
     @GetMapping("/members/register")
-    public String registerProcess(Model model){
+    public String register(Model model){
         model.addAttribute("RegisterForm", new LoginForm());
 
         return "members/registerForm";
@@ -109,7 +109,7 @@ public class MemberController {
 
     // 회원가입 처리
     @PostMapping("/members/registerpro")
-    public String register(Model model, LoginForm form){
+    public String registerProcess(Model model, LoginForm form){
         model.addAttribute("RegisterForm", new LoginForm());
         MemberDto memberDto = MemberDto.builder()
                 .name(form.getUsername())
@@ -121,11 +121,11 @@ public class MemberController {
 
         if (result == -1l){
             model.addAttribute("searchUrl", "/members/register");
-            model.addAttribute("message", "중복된 ID입니다");
+            model.addAttribute("message", "username already exists");
         }
         else{
             model.addAttribute("searchUrl", "/");
-            model.addAttribute("message", "회원가입하신 것을 축하드립니다");
+            model.addAttribute("message", "Your registration has been successfully completed");
         }
 
         return "message";

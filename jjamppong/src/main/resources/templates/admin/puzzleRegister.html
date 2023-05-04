@@ -13,23 +13,25 @@
         <div class="container-fluid">
             <h1 class="mt-4">Register</h1>
 
-            <form th:action = "@{/puzzles/registerpro}" th:object = "${PuzzleRegisterForm}" method = "post">
+            <form th:action = "@{/admin/puzzle/registerpro}" th:object = "${PuzzleRegisterForm}" method = "post" enctype="multipart/form-data">
                 <label>Title</label><br>
                 <input th:field="*{title}" type="text"><br><br>
 
                 <label>puzzle code</label><br>
-                <input th:field="*{puzzle_code}" type="text"><br><br>
+                <input th:field="*{puzzle_code}"rows="10" type="text"><br><br>
 
                 <label>difficulty</label><br>
-                <input th:field="*{difficulty}" type="text"><br><br>
+                <input th:field="*{difficulty}" rows="10" type="text"><br><br>
 
                 <label>Content</label><br>
-                <input th:field="*{content}" type="text"><br><br>
+                <textarea th:field="*{content}" cols="50" rows="10"></textarea><br><br>
 
                 <label>Solution</label><br>
-                <input th:field="*{solution}" type="text"><br><br>
+                <input th:field="*{solution}" rows="10" type="text"><br><br>
 
-                <button type="submit">register</button>
+                <input type = "file" th:field="*{image}"><br><br>
+
+                <button type="submit">submit</button>
             </form>
 
 

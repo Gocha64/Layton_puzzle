@@ -47,6 +47,6 @@ public class PuzzleResponseDto {
 
     public void ChangeContentNewlineTrim() {
         this.content = this.content.replaceAll("\\r\\n|\\r|\\n", "<br>");
-        log.info(content);
+        //log.info(content);
     }
 }

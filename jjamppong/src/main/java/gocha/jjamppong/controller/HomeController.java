@@ -50,7 +50,6 @@ public class HomeController {
     }
 
     /*
-    순환참조 문제 해결
     dto로 맵핑
     관리자 페이지
     관리자 퍼즐등록/삭제
