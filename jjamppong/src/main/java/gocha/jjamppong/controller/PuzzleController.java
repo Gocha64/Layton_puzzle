@@ -11,6 +11,7 @@ import gocha.jjamppong.service.MemberService;
 import gocha.jjamppong.service.PuzzleService;
 import gocha.jjamppong.service.SolvedPuzzleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class PuzzleController {
 
     private final PuzzleService puzzleService;
@@ -51,9 +53,11 @@ public class PuzzleController {
     @GetMapping("/puzzles/view/{puzzleId}")
     public String detail(@PathVariable("puzzleId") Long puzzleId, Model model){
         Puzzle puzzle = puzzleService.findOne(puzzleId);
+        PuzzleResponseDto puzzleDto =  PuzzleResponseDto.toResponseDto(puzzle);
+        puzzleDto.ChangeContentNewlineTrim();
 
 
-        model.addAttribute("puzzle", puzzle);
+        model.addAttribute("puzzle", puzzleDto);
         model.addAttribute("PuzzleAnswerSubmitForm", new PuzzleAnswerSubmitForm());
 
         return "puzzles/puzzleForm";

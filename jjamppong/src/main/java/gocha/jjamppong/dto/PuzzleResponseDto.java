@@ -7,15 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 public class PuzzleResponseDto {
     String title;
     String content;
     String puzzle_code;
+    String image_path;
     long difficulty;
     long id;
 
@@ -27,6 +30,7 @@ public class PuzzleResponseDto {
                 .title(puzzle.getTitle())
                 .puzzle_code(puzzle.getPuzzle_code())
                 .id(puzzle.getId())
+                .image_path(puzzle.getImage_path())
                 .build();
     }
 
@@ -39,5 +43,10 @@ public class PuzzleResponseDto {
                 .puzzle_code(solvedPuzzle.getPuzzle().getPuzzle_code())
                 .id(solvedPuzzle.getPuzzle().getId())
                 .build();
+    }
+
+    public void ChangeContentNewlineTrim() {
+        this.content = this.content.replaceAll("\\r\\n|\\r|\\n", "<br>");
+        log.info(content);
     }
 }
