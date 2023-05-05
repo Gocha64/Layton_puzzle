@@ -39,7 +39,7 @@ public class PuzzleService {
     }
     
     // 퍼즐 단일 조회
-//    @Cacheable(cacheNames = "puzzle", key="'puzzled=' + #id")
+    @Cacheable(cacheNames = "puzzle", key="'puzzled=' + #id")
     public Puzzle findOne(Long id) {return puzzleRepository.findById(id).orElse(new Puzzle());}
 
     // 퍼즐 정답 판별
