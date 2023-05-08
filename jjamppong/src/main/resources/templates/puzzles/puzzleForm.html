@@ -19,7 +19,7 @@
     <div id="page-content-wrapper">
         <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
         <!-- Page content-->
-        <div class="container-fluid">
+        <div class="container-fluid center">
             <h1 class="mt-4" th:text = "${puzzle.title}">Puzzle Title</h1>
             <img th:src="${puzzle.image_path}"/>
             <p th:utext = "${puzzle.content}"></p>

@@ -18,7 +18,7 @@
   <div id="page-content-wrapper">
     <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
     <!-- Page content-->
-    <div class="container-fluid">
+    <div class="container-fluid center">
       <h1 class="mt-4">Correct!</h1>
       <img th:src="${solution.image_path}"/>
       <p th:utext = "${solution.content}"></p>

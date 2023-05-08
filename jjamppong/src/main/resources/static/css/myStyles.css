@@ -19,3 +19,8 @@ a:active { color:black; }
 .margin1{
     margin-left: 100px;
 }
+
+.center{
+  width: 1000px; /* 정렬하려는 요소의 넓이를 반드시 지정 */
+  margin: 0 auto;
+}

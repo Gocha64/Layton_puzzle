@@ -10,7 +10,7 @@
     <div id="page-content-wrapper">
         <div th:replace="~{fragments/topNavigation :: topNavigation}"/>
         <!-- Page content-->
-        <div class="container-fluid">
+        <div class="container-fluid center">
             <h1 class="mt-4">Simple puzzle List</h1>
             <div style="margin-left: 100px; font-size: 120%;">
                 <table>
@@ -29,8 +29,9 @@
                             <a th:text="${puzzle.title}" th:href="@{/puzzles/view/{id}(id = ${puzzle.id})}">퍼즐제목</a>
                         </td>
                         <td width="100" th:text="${puzzle.difficulty}">퍼즐난이도</td>
-                    </tr>
 
+                        <td th:if="${role}=='[ROLE_ADMIN]'" ><button th:onClick="|location.href='@{/admin/puzzle/edit/{id}(id = ${puzzle.id})}'|">edit</button></td>
+                    </tr>
                     </tbody>
                 </table>
 
